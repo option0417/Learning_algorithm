@@ -7,24 +7,36 @@
  * =====================================================================================
  */
 
-typedef struct {
-  void* val;
-} Value;
+#include <stdio.h>
+#include <stdlib.h>
+#include "stack_c.h"
 
-bool push(Value* val);
-Value* pop();
-int size();
 
-typedef struct {
-  // Data
-  Value* values;
-  int size;
-  int currSize;
-
-  // Function
-  bool      (*push) (Value*);
-  Value*    (*pop) (void);
-  int       (*size) (void);
+int size(Stack* stack) {
+    return stack->currIdx + 1;
 }
 
+int capacity(Stack* stack) {
+    return stack->_capacity;
+}
 
+int isFull(Stack* stack) {
+    return stack->capacity(stack) - stack->size(stack) == 0 ? 1 : 0;
+}
+
+int push(Value* val, Stack* stack) {
+    if (stack->isFull(stack)) {
+        return 0;
+    } else {
+        stack->valArray[++stack->currIdx] = val;
+        return 1;
+    }
+}
+
+Value* pop(Stack* stack) {
+  if (stack->size(stack) == 0) {
+    return NULL;
+  } else {
+    return stack->valArray[stack->currIdxx--];
+  }
+}
