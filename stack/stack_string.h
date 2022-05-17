@@ -1,6 +1,6 @@
 /*
  * =====================================================================================
- *       Filename:  stack_c.h
+ *       Filename:  stack_string.h
  *    Description:  
  *        Created:  04/07/2022
  *         Author:  W.D Su
@@ -8,29 +8,25 @@
  */
 
 
-// Define Value as container for any data-type
-typedef struct {
-  void* val;
-} Value;
-
 typedef struct stack Stack;
 
 struct stack {
   // Data Fields
-  Value* valArray;
+  char** _stringArray;
   int _capacity;
-  int currIdx;
+  int _currIdx;
 
   // Function
-  int       (*push) (Value*, Stack*);
-  Value*    (*pop) (Stack*);
+  int       (*push) (char*, Stack*);
+  char*	    (*pop) (Stack*);
   int       (*size) (Stack*);
   int       (*isFull) (Stack*);
   int       (*capacity) (Stack*);
 };
 
-int push(Value* val, Stack* stack);
-Value* pop(Stack* stack);
+int push(char* val, Stack* stack);
+char* pop(Stack* stack);
 int size(Stack* stack);
 int capacity(Stack* stack);
 int isFull(Stack* stack);
+Stack* buildStack(int capacity);
