@@ -5,51 +5,71 @@ import (
 	"testing"
 )
 
-func TestHelloWorld(t *testing.T) {
-	stack := &Stack{}
-	stack.build(5)
+func TestPushToStack(t *testing.T) {
+	var _capacity int = 5
 
-	if 5 != stack.capacity() {
-		t.Fatalf("The capacity of stack is not equal to %d\n", 5)
+	stack := &Stack{}
+	stack.build(_capacity)
+
+	if _capacity != stack.capacity() {
+		t.Fatalf("The capacity of stack is not equal to %d\n", _capacity)
 	}
 
-	stack.push(1)
-	stack.push(3)
-	stack.push(5)
-	stack.push(7)
-	stack.push(9)
+	for i := 1; i <= 5; i++ {
+		var isOk bool = stack.push(i)
+
+		if !isOk {
+			t.Fatalf("Fail since push value to stack\n")
+		}
+
+		if stack.size() != i {
+			t.Fatalf("Fail since wrong size of stack\n")
+		}
+
+		fmt.Printf("Push %d to stack\n", i)
+	}
 
 	if stack.size() != 5 {
-		t.Fatalf("The size of stack is not equal to %d\n", 5)
+		t.Fatalf("Fail since size of stack is not equal to %d\n", 5)
+	}
+}
+
+func TestPopFromStack(t *testing.T) {
+	var _capacity int = 5
+
+	stack := &Stack{}
+	stack.build(_capacity)
+
+	if _capacity != stack.capacity() {
+		t.Fatalf("The capacity of stack is not equal to %d\n", _capacity)
 	}
 
-	rtn := stack.pop()
-	if rtn != 9 {
-		t.Fatalf("The value from Pop() is not equal to %d\n", 9)
-	}
-	fmt.Printf("Pop: %d\n", rtn)
+	for i := 1; i <= 5; i++ {
+		var isOk bool = stack.push(i)
 
-	rtn = stack.pop()
-	if rtn != 7 {
-		t.Fatalf("The value from Pop() is not equal to %d\n", 7)
-	}
-	fmt.Printf("Pop: %d\n", rtn)
+		if !isOk {
+			t.Fatalf("Fail since push value to stack\n")
+		}
 
-	rtn = stack.pop()
-	if rtn != 5 {
-		t.Fatalf("The value from Pop() is not equal to %d\n", 5)
+		if stack.size() != i {
+			t.Fatalf("Fail since wrong size of stack\n")
+		}
 	}
-	fmt.Printf("Pop: %d\n", rtn)
 
-	rtn = stack.pop()
-	if rtn != 3 {
-		t.Fatalf("The value from Pop() is not equal to %d\n", 3)
-	}
-	fmt.Printf("Pop: %d\n", rtn)
+	for i := 5; i >= 1; i-- {
+		rtn := stack.pop()
+		if rtn != i {
+			t.Fatalf("Fail since value from Pop() is not equal to %d\n", i)
+		}
 
-	rtn = stack.pop()
-	if rtn != 1 {
-		t.Fatalf("The value from Pop() is not equal to %d\n", 1)
+		if stack.size() != i-1 {
+			t.Fatalf("Fail since size of stack is not equal to %d\n", i-1)
+		}
+
+		fmt.Printf("Pop: %d\n", rtn)
 	}
-	fmt.Printf("Pop: %d\n", rtn)
+
+	if stack.size() != 0 {
+		t.Fatalf("Fail since size of stack is not equal to %d\n", 0)
+	}
 }
