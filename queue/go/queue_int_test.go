@@ -6,7 +6,7 @@ import (
 )
 
 func TestEnQueue(t *testing.T) {
-	queue := buildQueue(5)
+	queue := BuildQueue(5)
 
 	for i := 1; i <= 5; i++ {
 		queue.enQueue(i)
@@ -18,6 +18,7 @@ func TestEnQueue(t *testing.T) {
 		if queue.isEmpty() {
 			t.Fatalf("Fail since return of isEmpty is not equal to false\n")
 		}
+		fmt.Printf("EnQueue %d done\n", i)
 	}
 
 	if queue.size() != len(queue._valStore) {
@@ -26,7 +27,7 @@ func TestEnQueue(t *testing.T) {
 }
 
 func TestDeQueue(t *testing.T) {
-	queue := buildQueue(5)
+	queue := BuildQueue(5)
 
 	for i := 1; i <= 5; i++ {
 		queue.enQueue(i)
@@ -45,10 +46,8 @@ func TestDeQueue(t *testing.T) {
 	}
 
 	for i := 1; i <= 5; i++ {
-		queue.show()
 		rtn := queue.deQueue()
 
-		fmt.Printf("%d\n", rtn)
 		if rtn != i {
 			t.Fatalf("Fail since return of deQueue is not equal to %d\n", i)
 		}
@@ -56,5 +55,6 @@ func TestDeQueue(t *testing.T) {
 		if queue.size() != len(queue._valStore)-i {
 			t.Fatalf("Fail since size of the queue is not equal to %d\n", len(queue._valStore)-i)
 		}
+		fmt.Printf("DeQueue %d done\n", rtn)
 	}
 }

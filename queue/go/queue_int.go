@@ -9,7 +9,7 @@ type Queue struct {
 	_valStore []int
 }
 
-func buildQueue(_capacity int) *Queue {
+func BuildQueue(_capacity int) *Queue {
 	queue := &Queue{}
 	queue._head = 0
 	queue._tail = 0
@@ -38,7 +38,6 @@ func (queue *Queue) deQueue() int {
 		return -1
 	} else {
 		rtn := queue._valStore[queue._head]
-		queue._valStore[queue._head] = 0
 
 		queue._size--
 
