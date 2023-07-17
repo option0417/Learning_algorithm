@@ -68,7 +68,7 @@ char* pop(Stack* stack) {
   }
 }
 
-
+/*
 int main(int argc, char* argv[]) {
   char* str1 = "Hello";
   char* str2 = ", ";
@@ -110,4 +110,5 @@ int main(int argc, char* argv[]) {
   printf("Size: %d\n", stack->size(stack));
   printf("Is full? %d\n", stack->isFull(stack));
   return 0;
-} 
+}
+*/
